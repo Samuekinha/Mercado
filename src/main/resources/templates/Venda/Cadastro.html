@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>Cadastro de cliente</title>
+</head>
+<body>
+
+<div th:insert="~{NavBar :: fragment}"></div>
+
+<div class="container d-flex justify-content-center">
+
+
+
+</div>
+
+<div class="bg-primary text-white text-center p-3 fixed-bottom">
+    <button  class="btn btn-primary"
+             data-bs-toggle="modal"
+             data-bs-target="#optionsModal">
+        + Itens
+    </button>
+</div>
+
+<div class="modal fade" id="VendasCad" data-bs-backdrop="false" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content" style="background-color: rgb(113, 112, 93);">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="optionsModalLabel">Opções</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modalBox">
+                    <div class="row">
+                        <input class="d-flex justify-content-center" id="selectedIrrigacaoId" type="hidden" readonly="readonly">
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-5">
+                            <label for="datairrigacao">Data irrigação:</label>
+                            <input type="date" name="datairrigacao" id="datairrigacao" class="form-control" autocomplete="off">
+                        </div>
+                        <div class="col-5">
+                            <label for="horairrigacao">Hora e min. irrigação:</label>
+                            <input type="time" name="horairrigacao" id="horairrigacao" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3"></div>
+                        <div class="col-6">
+                            <label for="intervalo">Intervalo (em min.):</label>
+                            <input type="number" name="intervalo" id="intervalo" class="form-control" min="1" max="30" step="1">
+                        </div>
+                        <div class="col-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-content mt-3 btn btn-primary">
+                    <input id="SubmitNovoItem" type="submit" value="Adicionar" required="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/Venda.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>

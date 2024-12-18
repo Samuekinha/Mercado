@@ -1,18 +1,16 @@
 package com.mercado.mercado.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Data
 @Entity
-@Table(name = "produtos_venda")
+@Table(name = "itens_venda")
 public class M_ProdutoVenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_produto_venda")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne

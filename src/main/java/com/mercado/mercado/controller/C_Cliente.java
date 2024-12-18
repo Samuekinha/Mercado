@@ -17,7 +17,7 @@ public class C_Cliente {
 
     @GetMapping("/Cadastro")
     public String getCadastroCliente(){
-        return "/Cliente/Cadastro";
+        return "Cliente/Cadastro";
     }
 
     @PostMapping("/Cadastro")
@@ -27,13 +27,13 @@ public class C_Cliente {
                                     @RequestParam("TelCliente") String telefone,
                                     Model model){
 
-        if (!S_Cliente.cadastroCliente(nome, email, endereco, telefone))
+        if (s_cliente.cadastroCliente(nome, email, endereco, telefone))
             model.addAttribute("message", "Erro no Cadastro!");
         else {
             model.addAttribute("message", "Cadastrou!");
         }
 
-        return "/Cliente/Cadastro";
+        return "Cliente/Cadastro";
     }
 
 }

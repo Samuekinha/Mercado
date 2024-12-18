@@ -1,20 +1,18 @@
 package com.mercado.mercado.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "vendas")
 public class M_Venda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_venda")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
