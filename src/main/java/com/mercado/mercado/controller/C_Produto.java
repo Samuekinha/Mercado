@@ -21,12 +21,12 @@ public class C_Produto {
         this.s_produto = s_produto;
     }
 
-    @GetMapping("/Cadastrar")
+    @GetMapping("/Cadastro")
     public String gCadastrarProduto(){
         return "Produto/Cadastro";
     }
 
-    @PostMapping("/Cadastrar")
+    @PostMapping("/Cadastro")
     public String pCadastrarProduto(@RequestParam("NomeProduto") String nome,
                                     @RequestParam("NomeEmpresa") String empresa,
                                     @RequestParam("ValorProduto") BigDecimal valor,

@@ -16,48 +16,48 @@ $("#VendasCad").on('hidden.bs.modal', function () {
     document.getElementById('selectedIrrigacaoId').value = '';
 });
 
-/*
-optionsModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget; // O botão que acionou o modal
+// Configuração para carregar as informações ao abrir o modal
+document.addEventListener('DOMContentLoaded', function () {
+    const VendasCad = document.getElementById('Clientevenda');
+    if (!VendasCad) {
+        console.error('Modal não encontrado!');
+        return;
+    }
 
-        // Pega o ID da irrigação do botão
-        const id = button.getAttribute('data-irrigacao-id');
+});
 
-        // Faz uma requisição AJAX para buscar os dados mais recentes do servidor
-        $.ajax({
-            url: `/irrigacao/${id}`,
-            method: 'GET',
-            success: function (data) {
-                // Preenche os campos do modal com os dados retornados
-                document.getElementById('datairrigacao').value = data.dataIrrigacao || '';
+let selectedRow = null;
 
-                // Formata a hora para o padrão HH:mm
-                if (data.horaIrrigacao) {
-                    const horaRecebida = data.horaIrrigacao.split(":");
-                    const horaFormatada = horaRecebida.slice(0, 2).join(":"); // Obtém apenas horas e minutos
-                    document.getElementById('horairrigacao').value = horaFormatada;
-                } else {
-                    document.getElementById('horairrigacao').value = '';
-                }
+function selectRow(row) {
+    if (selectedRow) {
+        selectedRow.classList.remove("selected");
+    }
+    selectedRow = row;
+    selectedRow.classList.add("selected");
+}
 
-                document.getElementById('intervalo').value = data.intervalo || '';
-                document.getElementById('selectedIrrigacaoId').value = id; // Atualiza o ID escondido
-            },
-            error: function () {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erro pegando próxima irrigação!',
-                    text: 'Algo deu errado ao pegar as informações da próxima irrigação. Recarregue a página.',
-                    showConfirmButton: false,
-                    timer: 6000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                $("#optionsModal").modal('hide'); // Fecha o modal em caso de erro
-            }
-        });
-    });
-*/
+function confirmSelection() {
+    if (selectedRow) {
+        const id = selectedRow.cells[0].textContent;
+        const nome = selectedRow.cells[1].textContent;
+        const email = selectedRow.cells[2].textContent;
+
+        document.getElementById("selectedClient").textContent =
+            `Cliente selecionado: ${nome} (ID: ${id}, Email: ${email})`;
+
+        // Atualizar os campos do formulário oculto
+        document.getElementById("clienteId").value = id;
+
+        // Enviar o formulário
+        document.getElementById("clienteForm").submit();
+
+        // Fechar o modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('Clientevenda'));
+        modal.hide();
+
+        // Enviar os dados ao backend (opcional, explicado abaixo)
+    } else {
+        alert("Nenhum cliente selecionado!");
+    }
+}
+
