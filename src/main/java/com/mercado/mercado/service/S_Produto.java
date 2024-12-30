@@ -21,42 +21,31 @@ public class S_Produto {
         this.r_produto = r_produto;
     }
 
-    public Boolean cadastroProduto(String nome, String empresa, BigDecimal valor,
-                                   String desc, BigInteger estoque){
-        Boolean podeSalvar = true;
-
-        if (nome != null && empresa != null && valor != null && desc != null &&
-            estoque != null){
-
-            List<M_Produto> m_produtos = r_produto.findAll();
-            m_produtos = m_produtos.isEmpty() ? null : m_produtos;
-
-            if (m_produtos != null){
-                for (M_Produto m_produto : m_produtos) {
-                    M_Produto produto = m_produtos.get(Math.toIntExact(m_produto.getId()));
-
-                    String nomeP = produto.getNome();
-                    String nomeE = produto.getEmpresa();
-                    if (Objects.equals(nomeP, nome) && Objects.equals(nomeE, empresa)){
-                        podeSalvar = false;
-                        break;
-                    }
-                }
-            }
+    public boolean cadastrarProduto(String nome, String empresa, BigDecimal valor,
+                                    String descricao, BigInteger estoque) {
+        // Validação de parâmetros
+        if (nome == null || empresa == null || valor == null || descricao == null || estoque == null) {
+            throw new IllegalArgumentException("Todos os campos são obrigatórios.");
         }
 
-        if (podeSalvar){
-            M_Produto m_produto = new M_Produto();
+        // Verifica se o produto já existe no banco
+        boolean produtoExistente = r_produto.existsByNomeAndEmpresa(nome, empresa);
 
-            m_produto.setNome(nome);
-            m_produto.setEmpresa(empresa);
-            m_produto.setPreco(valor);
-            m_produto.setDescricao(desc);
-            m_produto.setQuantidadeEstoque(estoque);
-            r_produto.save(m_produto);
+        if (produtoExistente) {
+            return false; // Não permite salvar um produto duplicado
         }
 
-        return podeSalvar;
+        // Cria e salva o novo produto
+        M_Produto novoProduto = new M_Produto();
+        novoProduto.setNome(nome);
+        novoProduto.setEmpresa(empresa);
+        novoProduto.setPreco(valor);
+        novoProduto.setDescricao(descricao);
+        novoProduto.setQuantidadeEstoque(estoque);
+
+        r_produto.save(novoProduto);
+
+        return true; // Produto salvo com sucesso
     }
 
 }

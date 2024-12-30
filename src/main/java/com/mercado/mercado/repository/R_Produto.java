@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface R_Produto extends JpaRepository<M_Produto, Long> {
+    boolean existsByNomeAndEmpresa(String nome, String empresa);
 }
+

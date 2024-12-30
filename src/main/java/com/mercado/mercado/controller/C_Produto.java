@@ -34,7 +34,7 @@ public class C_Produto {
                                     @RequestParam("EstoqueProduto") BigInteger estoque,
                                     Model model){
 
-        if(s_produto.cadastroProduto(nome, empresa, valor, desc, estoque)){
+        if(s_produto.cadastrarProduto(nome, empresa, valor, desc, estoque)){
             model.addAttribute("message", "Cadastrado!");
         } else{
             model.addAttribute("message", "Erro no Cadastro.");
